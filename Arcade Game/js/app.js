@@ -6,6 +6,7 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.dt = null;
 }
 
 // Update the enemy's position, required method for game
@@ -14,11 +15,12 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.dt = dt;
 }
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    //ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 // Now write your own player class
@@ -34,11 +36,11 @@ Player.prototype.update = function(dt) {
 
 }
 
-Player.prototype.render = function() {
+Player.prototype.render = function() {console.log(Resources.get(this.sprite))
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handelInput = function() {
+Player.prototype.handleInput = function(input) {
 
 }
 
