@@ -7,6 +7,8 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.dt = null;
+    this.x = 0;
+    this.y = (Math.floor(Math.random() * 3) + 1) * 70;
 }
 
 // Update the enemy's position, required method for game
@@ -20,7 +22,7 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    //ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 // Now write your own player class
@@ -28,8 +30,8 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
     this.sprite = 'images/char-boy.png';
-    this.x = 2;
-    this.y = 3;
+    this.x = 200;
+    this.y = 400;
 }
 
 Player.prototype.update = function(dt) {
@@ -40,8 +42,32 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+// 82 and 100 are magical at the moment
 Player.prototype.handleInput = function(input) {
-
+    switch (input) {
+        case 'up':
+            if (this.y > 0) {
+                this.y -= 82;
+            }
+            break;
+        case 'down':
+            if (this.y < 400) {
+                this.y += 82;
+            }
+            break;
+        case 'left':
+            if (this.x > 0) {
+                this.x -= 100;
+            }
+            break;
+        case 'right':
+            if (this.x < 400) {
+                this.x += 100;
+            }
+            break;
+        default:
+            console.log('Invalid input');
+    }
 }
 
 // Now instantiate your objects.
@@ -49,6 +75,9 @@ Player.prototype.handleInput = function(input) {
 // Place the player object in a variable called player
 player = new Player();
 allEnemies = [];
+enemy1 = new Enemy();
+allEnemies.push(enemy1);
+
 
 
 // This listens for key presses and sends the keys to your
