@@ -24,21 +24,30 @@ plt.scatter(grade_slow, bumpy_slow, color = "r", label="slow")
 plt.legend()
 plt.xlabel("bumpiness")
 plt.ylabel("grade")
-plt.show()
 #################################################################################
 
 
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
+from sklearn.cross_validation import cross_val_score
+from sklearn.ensemble import AdaBoostClassifier
+#clf = AdaBoostClassifier(n_estimators=100)
 
+from sklearn.ensemble import RandomForestClassifier
+#clf = RandomForestClassifier(min_samples_split=40)
 
+from sklearn.neighbors import KNeighborsClassifier
+clf = KNeighborsClassifier(n_neighbors=10, weights="distance")
 
+clf = clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
 
-
-
-
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred, labels_test)
+print acc
 
 try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
     pass
+plt.show()
